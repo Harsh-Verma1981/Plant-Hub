@@ -67,8 +67,8 @@ else{
         $mail->SMTPAuth=true;
         $mail->Username=$_ENV['MAILER_FROM'];
         $mail->Password=$_ENV['MAILER_PASS'];
-        $mail->SMTPSecure='ssl';
-        $mail->Port=465;
+        $mail->SMTPSecure=$_ENV['MAILER_SECURE'];
+        $mail->Port=$_ENV['MAILER_PORT'];
 
         $mail->setFrom($_ENV['MAILER_FROM'],'Plant-Hub');
         $mail->addAddress($email,$name);
