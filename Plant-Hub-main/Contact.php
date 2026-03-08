@@ -66,8 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $mail->SMTPAuth = true;
                     $mail->Username = $_ENV['MAILER_FROM'];
                     $mail->Password = $_ENV['MAILER_PASS'];
-                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-                    $mail->Port = 465;
+                    $mail->SMTPSecure = $_ENV['MAILER_SECURE'];
+                    $mail->Port = $_ENV['MAILER_PORT'];
 
                     // Recipients
                     $mail->setFrom($_ENV['MAILER_FROM'], 'Plant-Hub');
