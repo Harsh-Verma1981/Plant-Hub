@@ -1,5 +1,6 @@
 <?php
 session_start();
+require 'config.php';
 
 if(!isset($_SESSION['email']) && isset($_COOKIE['email'])){
     $_SESSION['email'] = $_COOKIE['email'];
@@ -62,14 +63,14 @@ else{
         try{
 
         $mail->isSMTP();
-        $mail->Host='smtp.gmail.com';
+        $mail->Host=$_ENV['MAILER_HOST'];
         $mail->SMTPAuth=true;
-        $mail->Username='harv280905@gmail.com';
-        $mail->Password='caat ygoi uiyo mvqm';
+        $mail->Username=$_ENV['MAILER_FROM'];
+        $mail->Password=$_ENV['MAILER_PASS'];
         $mail->SMTPSecure='ssl';
         $mail->Port=465;
 
-        $mail->setFrom('harv280905@gmail.com','Plant-Hub');
+        $mail->setFrom($_ENV['MAILER_FROM'],'Plant-Hub');
         $mail->addAddress($email,$name);
 
         $mail->isHTML(true);

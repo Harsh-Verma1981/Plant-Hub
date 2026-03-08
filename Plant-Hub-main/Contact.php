@@ -5,7 +5,7 @@ if(!isset($_SESSION['email']) && isset($_COOKIE['email'])) {
     $_SESSION['email'] = $_COOKIE['email'];
     
 }
-
+require 'config.php';
 // Import PHPMailer classes
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -62,15 +62,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 try {
                     // Server settings
                     $mail->isSMTP();
-                    $mail->Host = 'smtp.gmail.com';
+                    $mail->Host = $_ENV['MAILER_HOST'];
                     $mail->SMTPAuth = true;
-                    $mail->Username = 'harv280905@gmail.com';
-                    $mail->Password = 'caat ygoi uiyo mvqm';
+                    $mail->Username = $_ENV['MAILER_FROM'];
+                    $mail->Password = $_ENV['MAILER_PASS'];
                     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
                     $mail->Port = 465;
 
                     // Recipients
-                    $mail->setFrom('harv280905@gmail.com', 'Plant-Hub');
+                    $mail->setFrom($_ENV['MAILER_FROM'], 'Plant-Hub');
                     $mail->addAddress($email, $orgname);
 
                     // Content

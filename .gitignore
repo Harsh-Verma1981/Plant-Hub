@@ -1,0 +1,11 @@
+# Never upload secrets
+.env
+.env.*
+junk.txt
+
+# Composer folder (big & not needed in repo)
+vendor/
+
+# Other common junk
+*.log
+*.sql

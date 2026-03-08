@@ -91,6 +91,65 @@ if(!isset($_SESSION['email']) && isset($_COOKIE['email'])) {
     </style>
 </head>
 <body>
+<?php if (isset($_SESSION['success_message'])): ?>
+    <div id="success-toast" 
+         class="fixed top-5 right-5 z-[1000] bg-green-50 border-l-4 border-green-600 text-green-800 p-4 pr-12 rounded-lg shadow-xl max-w-sm transition-all duration-400 ease-in-out transform translate-x-full opacity-0">
+        
+        <!-- Close button -->
+        <button id="close-toast" 
+                class="absolute top-2 right-2 text-green-700 hover:text-green-900 focus:outline-none">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+
+        <div class="flex items-start">
+            <svg class="w-6 h-6 mr-3 text-green-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <div>
+                <p class="font-semibold">Order Confirmed!</p>
+                <p class="text-sm mt-1"><?= htmlspecialchars($_SESSION['success_message']) ?></p>
+            </div>
+        </div>
+    </div>
+
+    <?php unset($_SESSION['success_message']); ?>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toast = document.getElementById('success-toast');
+            const closeBtn = document.getElementById('close-toast');
+
+            if (!toast) return;
+
+            // Show toast
+            setTimeout(() => {
+                toast.classList.remove('translate-x-full', 'opacity-0');
+                toast.classList.add('translate-x-0', 'opacity-100');
+            }, 300);
+
+            // Auto-dismiss after 6 seconds
+            const autoDismiss = setTimeout(() => {
+                dismissToast();
+            }, 6000);
+
+            // Manual close
+            closeBtn.addEventListener('click', () => {
+                clearTimeout(autoDismiss);
+                dismissToast();
+            });
+
+            function dismissToast() {
+                toast.classList.remove('translate-x-0', 'opacity-100');
+                toast.classList.add('translate-x-full', 'opacity-0');
+                setTimeout(() => {
+                    toast.remove();
+                }, 400); // match transition duration
+            }
+        });
+    </script>
+<?php endif; ?>
     <!-- Navbar -->
 <nav class="fixed w-full bg-gray-300 shadow-md z-50 mb-36">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
