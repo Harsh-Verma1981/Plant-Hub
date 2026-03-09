@@ -281,6 +281,14 @@ MAIL_SECURE=ssl
 ---
 
 License
-- This project does not contain a license file by default. You can add one (for example MIT) if you want to make the project open source.
+- MIT
 
 ---
+
+---
+- live - https://plantlovershub.rf.gd/
+- This site may be appeared unsafe but don't worry this project is safe and secure and no real payment gateway is there.
+- This website uses testing mode API kEY and SECRET KEY
+---
+
+Please star this repo if you like this.
